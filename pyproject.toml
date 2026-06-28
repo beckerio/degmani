@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "degmani"
+version = "0.1.0"
+description = "Degadation manifold training utilities built around YOLO feature backbones."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "degmani contributors" }
+]
+dependencies = [
+  "numpy",
+  "opencv-python",
+  "PyYAML",
+  "scikit-learn",
+  "torch",
+  "torchvision",
+  "tqdm",
+  "ultralytics",
+  "kornia",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
