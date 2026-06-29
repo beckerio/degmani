@@ -177,7 +177,7 @@ def analyse(opt, device="cuda"):
                                       train_backbone=True,
                                       device=device)
 
-    checkpoint = torch.load(opt.weights_distmani)
+    checkpoint = torch.load(opt.weights_distmani, map_location=device)
 
     distmani.load_state_dict(checkpoint['model_state_dict'])
     distmani.eval()

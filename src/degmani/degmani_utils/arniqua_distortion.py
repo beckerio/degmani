@@ -631,7 +631,7 @@ def color_diffusion(x: torch.Tensor, amount: int) -> torch.Tensor:
 
 def color_shift(x: torch.Tensor, amount: int) -> torch.Tensor:
     def perc(x, perc):
-        xs = torch.sort(x)
+        xs = torch.sort(x.flatten()).values
         i = len(xs) * perc / 100.
         i = max(min(i, len(xs)), 1)
         v = xs[round(i - 1)]
@@ -924,7 +924,7 @@ def quantization(x: torch.Tensor, levels: int) -> torch.Tensor:
 def color_block(x: torch.Tensor, pnum: int) -> torch.Tensor:
     patch_size = [32, 32]
 
-    c, w, h = x.shape
+    c, h, w = x.shape
 
     y = x
 
@@ -962,7 +962,7 @@ def high_sharpen(x: torch.Tensor, amount: int, radius: int = 3) -> torch.Tensor:
 
     l = filter2D(l, sharp_filter.unsqueeze(0))
 
-    lab[0, ...] = l
+    lab[0, ...] = l.squeeze(0).squeeze(0)
 
     if len(lab.shape) == 3:
         lab = lab.unsqueeze(0)
@@ -984,18 +984,14 @@ def non_linear_contrast_change(x: torch.Tensor, output_offset_value: float, outp
     low_out = output_central_value - output_offset_value
     high_out = output_central_value + output_offset_value
 
-    # Clip the input image to the specified input range
-    x = np.clip(x, low_in, high_in)
+    x = torch.clamp(x, low_in, high_in)
 
-    # Calculate the slope and intercept of the linear transformation
     slope = (high_out - low_out) / (high_in - low_in)
     intercept = low_out - slope * low_in
 
-    # Apply the linear transformation to adjust the pixel values
     y = slope * x + intercept
 
-    # Clip the adjusted image to the specified output range
-    y = np.clip(y, low_out, high_out)
+    y = torch.clamp(y, low_out, high_out)
 
     return y
 

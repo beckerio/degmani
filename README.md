@@ -70,7 +70,7 @@ The scripts under `scripts/analyse/` support experiment workflows such as:
 - prototype estimation from selected image sets
 - embedding inspection under pristine and degraded inputs
 - `imdeg` is an optional dependency used only for selected visualization and prototype-analysis workflows, not for the core training pipeline.
-- To enable those workflows, install the optional visualization dependency separately, for example from `https://github.com/beckerio/imdeg`.
+- To enable those workflows, install the optional visualization dependency separately `https://github.com/beckerio/imdeg`.
 
 ## Notes
 - Parts of the code still reflect active paper experimentation and checkpoint-specific assumptions.

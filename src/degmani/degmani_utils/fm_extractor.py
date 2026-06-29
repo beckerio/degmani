@@ -76,21 +76,8 @@ class FeatureExtractor(nn.Module):
 
     def forward(self, x):
         _ = self.model(x)
-
-        for layer in self.layers:
-            test =  self._features[layer]
-            print(test.shape)
-            print(self.global_avg_pool(test).shape)
-            test = test.view(x.size(0), -1)
-            print(test.shape)
-            test = self.global_avg_pool(test)
-            print(test.shape)
-            #input()
-
-        #pooled_features = [self.global_avg_pool(self._features[layer]).view(x.size(0), -1) for layer in self.layers]
         pooled_features = [self.global_avg_pool(self._features[layer]).squeeze(-1).squeeze(-1) for layer in self.layers]
         combined_features = torch.cat(pooled_features, dim=1)
-        print(combined_features.shape)
         return nn.functional.normalize(combined_features, p=2, dim=1)  # L2 normalization
 
 
@@ -214,10 +201,6 @@ class YOLOActivationExtractor(nn.Module):
         # ModuleList of layers
         self.layers = list(self.core.model)
 
-        print(f"layers {self.layers}")
-        #input()
-
-
         self.style_layers = style_layers or []
         self.capture_detect_input = capture_detect_input
 
@@ -230,12 +213,8 @@ class YOLOActivationExtractor(nn.Module):
             if idx < 0 or idx >= len(self.layers):
                 raise IndexError(f"style_layers index {idx} out of range (0..{len(self.layers)-1}).")
             module = self.layers[idx]
-            print(f"module {module}")
             name = f"layer_{idx}_{module.__class__.__name__}"
-            print(f"name {name}")
-            input()
             module.register_forward_hook(self._make_activation_hook(name))
-        input()
         # Register hook to capture Detect head inputs (P3/P4/P5...)
         if self.capture_detect_input:
             for m in self.core.modules():

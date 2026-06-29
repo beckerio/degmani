@@ -127,8 +127,8 @@ def hard_negative_downsample_upsample(img_uint8: np.ndarray, ds_factor: int = 2)
 
     img_down = cv2.resize(img_uint8, (w // ds_factor, h // ds_factor), interpolation=cv2.INTER_LINEAR)
     # Step 2: Upsample by a factor of ds_factor
-    h_ds, w_ds = img_down.shape[:2]  # orig hw
-    img_up = cv2.resize(img_uint8, (w_ds * ds_factor, h_ds * ds_factor), interpolation=cv2.INTER_LINEAR)
+    h_ds, w_ds = img_down.shape[:2]
+    img_up = cv2.resize(img_down, (w_ds * ds_factor, h_ds * ds_factor), interpolation=cv2.INTER_LINEAR)
     return img_up
 
 

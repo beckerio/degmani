@@ -41,10 +41,10 @@ class Degradation_Manifold(nn.Module):
         super().__init__()
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
 
-        if not model_yaml: 
-            self.yolo = YOLO(weights).model.to(device)
+        if not model_yaml:
+            self.yolo = YOLO(weights).model.to(self.device)
         else:
-            ckpt = torch.load(weights, map_location=device, weights_only=True)
+            ckpt = torch.load(weights, map_location=self.device, weights_only=True)
             yolo_wrapper = YOLO(model_yaml)
             
             state_dict = ckpt['model_state_dict']
