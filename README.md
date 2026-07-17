@@ -95,7 +95,8 @@ If you use this code in academic work, please consider to cite the following pap
 ## Acknowledgement:
 - Agnolucci et al.: [GitHub](https://github.com/miccunifi/ARNIQA) - [Paper](https://ieeexplore.ieee.org/document/10483567)  
 - Hendrycks & Dietterich: [GitHub](https://github.com/hendrycks/robustness) - [Paper](https://openreview.net/forum?id=HJz6tiCqYm)
-- Öksüz et al.: [GitHub](https://github.com/asharakeh/probdet) - [Paper](https://ieeexplore.ieee.org/document/10203797)
+- Harakeh et al.: [GitHub](https://github.com/asharakeh/probdet) - [Paper](https://openreview.net/forum?id=YLewtnvKgR7)
+- Oksuz et al.: [GitHub](https://github.com/fiveai/saod) - [Paper](https://ieeexplore.ieee.org/document/10203797)
 - Michaelis et al.: [GitHub](https://github.com/bethgelab/robust-detection-benchmark) - [Paper](https://openreview.net/forum?id=ryljMpNtwr)
 
 
